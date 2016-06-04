@@ -1,3 +1,3 @@
 class Hotel < ApplicationRecord
-  has_one :accomodation_type
+  belongs_to :accomodation_type
 end
