@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
 # Use sqlite3 as the database for Active Record
@@ -18,11 +17,18 @@ gem 'puma', '~> 3.0'
 # gem 'capistrano-rails', group: :development
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
+
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'textacular', '~> 4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails', '>= 3.5.0.beta3', '< 3.6'
+  gem 'shoulda-matchers', '~> 2.8.0'
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
