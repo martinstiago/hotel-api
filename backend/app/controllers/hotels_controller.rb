@@ -1,5 +1,6 @@
 class HotelsController < ApplicationController
-  before_filter :find_hotel, except: [:index, :create]
+  before_action :find_hotel, except: [:index, :create]
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
     render json: Hotel.all
@@ -43,5 +44,9 @@ class HotelsController < ApplicationController
 
   def find_hotel
     @hotel = Hotel.find(params[:id])
+  end
+
+  def record_not_found(error)
+    render json: { error: error.message }, status: :not_found
   end
 end
