@@ -3,7 +3,8 @@ class HotelsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def index
-    render json: Hotel.all
+    @hotels = params[:search].present? ? Hotel.fuzzy_search(params[:search]) : Hotel.all
+    render json: @hotels
   end
 
   def create

@@ -2,24 +2,68 @@ require 'rails_helper'
 
 describe HotelsController, type: :controller do
   describe '#index' do
-    let!(:hotels) { create_list :hotel, 5 }
+    context 'basic request' do
+      let!(:hotels) { create_list :hotel, 5 }
 
-    it 'returns all hotels' do
-      get :index
+      it 'returns all hotels' do
+        get :index
 
-      expect(response.status).to eq(200)
+        expect(response.status).to eq(200)
 
-      json = JSON.parse(response.body)
-      expect(json).to be_a(Array)
-      expect(json.count).to eq(5)
+        json = JSON.parse(response.body)
+        expect(json).to be_a(Array)
+        expect(json.count).to eq(5)
 
-      json.each_with_index do |value, index|
-        expect(value['id']).to eq(hotels[index].id)
-        expect(value['name']).to eq(hotels[index].name)
-        expect(value['address']).to eq(hotels[index].address)
-        expect(value['star_rating']).to eq(hotels[index].star_rating)
-        expect(value['accomodation_type'])
-          .to eq(hotels[index].accomodation_type.name)
+        json.each_with_index do |value, index|
+          expect(value['id']).to eq(hotels[index].id)
+          expect(value['name']).to eq(hotels[index].name)
+          expect(value['address']).to eq(hotels[index].address)
+          expect(value['star_rating']).to eq(hotels[index].star_rating)
+          expect(value['accomodation_type'])
+            .to eq(hotels[index].accomodation_type.name)
+        end
+      end
+    end
+
+    context 'searching' do
+      let!(:hotel_1) { create :hotel, name: 'Testing', address: 'foo' }
+      let!(:hotel_2) { create :hotel, name: 'bar', address: 'Testing' }
+      let!(:hotel_3) { create :hotel, name: 'Canad Inns', address: '29 Dysart Road' }
+
+      it 'searchs the query param on the name and address fields of the model' do
+        get :index, params: { search: 'Testing' }
+
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body)
+        expect(json).to be_a(Array)
+        expect(json.count).to eq(2)
+
+        expect(json.pluck('id')).to match_array([hotel_1.id, hotel_2.id])
+      end
+
+      it 'searchs for parts of the name and address fields of the model' do
+        get :index, params: { search: 'Testi' }
+
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body)
+        expect(json).to be_a(Array)
+        expect(json.count).to eq(2)
+
+        expect(json.pluck('id')).to match_array([hotel_1.id, hotel_2.id])
+      end
+
+      it 'does not have a case sensitive search' do
+        get :index, params: { search: 'testing' }
+
+        expect(response.status).to eq(200)
+
+        json = JSON.parse(response.body)
+        expect(json).to be_a(Array)
+        expect(json.count).to eq(2)
+
+        expect(json.pluck('id')).to match_array([hotel_1.id, hotel_2.id])
       end
     end
   end
