@@ -19,7 +19,7 @@
   getDefaultProps: ->
     hotels: []
   componentDidMount: ->
-    @loadCommentsFromServer();
+    @loadCommentsFromServer()
   render: ->
     React.DOM.div
       className: 'hotels'
@@ -38,4 +38,6 @@
         React.DOM.tbody null,
           if @state.hotels?
             for hotel in @state.hotels
-              React.createElement Hotel, key: hotel.id, hotel: hotel
+              React.createElement IndexHotel,
+                key: hotel.id
+                hotel: hotel
