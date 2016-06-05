@@ -14,15 +14,19 @@
         return
       ).bind(this)
     return
+
   getInitialState: ->
     options: []
     name: @props.name
     value: @props.value
+
   componentDidMount: ->
     @loadCommentsFromServer()
+
   handleChange: (e) ->
     @props.onChange(e)
     @setState value: @value
+
   render: ->
     if @state.options?
       React.DOM.select

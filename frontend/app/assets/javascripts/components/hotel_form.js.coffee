@@ -4,9 +4,29 @@
     address: ''
     star_rating: ''
     accomodation_type_id: ''
+
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
+
+  handleSubmit: (e) ->
+    e.preventDefault()
+    $.post
+      url: 'http://localhost:3000/hotels'
+      contentType: 'application/json'
+      dataType: 'json'
+      data: JSON.stringify(
+        hotel:
+          name: @state.name,
+          address: @state.address,
+          star_rating: @state.star_rating,
+          accomodation_type_id: @state.accomodation_type_id
+      )
+      error: (response) ->
+        alert(response.responseText)
+      success: ->
+        alert('Hotel Created')
+
   render: ->
     React.DOM.div
       className: 'hotels'
@@ -15,6 +35,7 @@
         'New Hotel'
       React.DOM.form
         className: 'form-inline'
+        onSubmit: @handleSubmit
 
         React.DOM.div
           className: 'form-group'

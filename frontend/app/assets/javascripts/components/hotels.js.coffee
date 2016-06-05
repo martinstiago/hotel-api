@@ -14,12 +14,16 @@
         return
       ).bind(this)
     return
+
   getInitialState: ->
     hotels: @props.data
+
   getDefaultProps: ->
     hotels: []
+
   componentDidMount: ->
     @loadCommentsFromServer()
+
   render: ->
     React.DOM.div
       className: 'hotels'
