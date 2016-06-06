@@ -141,7 +141,9 @@ describe HotelsController, type: :controller do
         expect(json['name']).to eq(hotel.name)
         expect(json['address']).to eq(hotel.address)
         expect(json['star_rating']).to eq(hotel.star_rating)
-        expect(json['accomodation_type']).to eq(hotel.accomodation_type.name)
+        expect(json['accomodation_type'].keys).to eq(%w(id name))
+        expect(json['accomodation_type']['id']).to eq(hotel.accomodation_type.id)
+        expect(json['accomodation_type']['name']).to eq(hotel.accomodation_type.name)
       end
     end
 
