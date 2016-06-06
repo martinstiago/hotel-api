@@ -5,27 +5,63 @@
     star_rating: ''
     accomodation_type_id: ''
 
+  componentDidMount: ->
+    if @props.path == 'update'
+      $.ajax
+        url: 'http://localhost:3000/hotels/' + @props.id
+        contentType: 'application/json'
+        dataType: 'json'
+        cache: false
+        success: ((data) ->
+          @setState name: data.name
+          @setState address: data.address
+          @setState star_rating: data.star_rating
+          @setState accomodation_type_id: data.accomodation_type.id
+        ).bind(this)
+        error: ((xhr, status, err) ->
+          console.error @props.url, status, err.toString()
+          return
+        ).bind(this)
+
   handleChange: (e) ->
     name = e.target.name
     @setState "#{ name }": e.target.value
 
   handleSubmit: (e) ->
     e.preventDefault()
-    $.post
-      url: 'http://localhost:3000/hotels'
-      contentType: 'application/json'
-      dataType: 'json'
-      data: JSON.stringify(
-        hotel:
-          name: @state.name,
-          address: @state.address,
-          star_rating: @state.star_rating,
-          accomodation_type_id: @state.accomodation_type_id
-      )
-      error: (response) ->
-        alert(response.responseText)
-      success: ->
-        alert('Hotel Created')
+    if @props.path == 'create'
+      $.post
+        url: 'http://localhost:3000/hotels/'
+        contentType: 'application/json'
+        dataType: 'json'
+        data: JSON.stringify(
+          hotel:
+            name: @state.name,
+            address: @state.address,
+            star_rating: @state.star_rating,
+            accomodation_type_id: @state.accomodation_type_id
+        )
+        error: (response) ->
+          alert(response.responseText)
+        success: ->
+          alert('Hotel Created')
+    else
+      $.ajax
+        method: 'PUT'
+        url: 'http://localhost:3000/hotels/' + @props.id
+        contentType: 'application/json'
+        dataType: 'json'
+        data: JSON.stringify(
+          hotel:
+            name: @state.name,
+            address: @state.address,
+            star_rating: @state.star_rating,
+            accomodation_type_id: @state.accomodation_type_id
+        )
+        error: (response) ->
+          alert(response.responseText)
+        success: ->
+          alert('Hotel Updated')
 
   render: ->
     React.DOM.div

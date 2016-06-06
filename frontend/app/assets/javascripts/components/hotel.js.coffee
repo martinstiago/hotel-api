@@ -34,4 +34,4 @@
             @state.hotel.name
           React.DOM.div null, @state.hotel.address
           React.DOM.div null, @state.hotel.star_rating
-          React.DOM.div null, @state.hotel.accomodation_type
+          React.DOM.div null, @state.hotel.accomodation_type.name
