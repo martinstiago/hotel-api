@@ -22,5 +22,7 @@
 en:
   api_url:
     development: 'http://localhost:3000/'
+    production: 'http://guarded-escarpment-55341.herokuapp.com/'
   base_url:
     development: 'http://localhost:3001/'
+    production: 'http://rocky-thicket-37376.herokuapp.com/'
