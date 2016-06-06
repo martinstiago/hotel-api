@@ -1,7 +1,7 @@
 @AccomodationTypeSelector = React.createClass
   loadCommentsFromServer: ->
     $.ajax
-      url: 'http://localhost:3000/accomodation_types'
+      url: "#{@props.url}accomodation_types"
       contentType: 'application/json'
       dataType: 'json'
       cache: false

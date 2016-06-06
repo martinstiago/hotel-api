@@ -1,17 +1,17 @@
   @IndexHotel = React.createClass
     handleView: (e) ->
       e.preventDefault()
-      window.location = "http://localhost:3001/hotels/#{ @props.hotel.id }"
+      window.location = "#{@props.base_url}hotels/#{ @props.hotel.id }"
 
     handleEdit: (e) ->
       e.preventDefault()
-      window.location = "http://localhost:3001/hotels/#{ @props.hotel.id }/edit"
+      window.location = "#{@props.base_url}hotels/#{ @props.hotel.id }/edit"
 
     handleDelete: (e) ->
       e.preventDefault()
       $.ajax
         method: 'DELETE'
-        url: "http://localhost:3000/hotels/#{ @props.hotel.id }"
+        url: "#{@props.url}/#{ @props.hotel.id }"
         contentType: 'application/json'
         dataType: 'json'
         success: () =>

@@ -71,4 +71,6 @@
               React.createElement IndexHotel,
                 key: hotel.id
                 hotel: hotel
+                url: @props.url
+                base_url: @props.base_url
                 handleDeleteHotel: @deleteHotel

@@ -8,7 +8,7 @@
   componentDidMount: ->
     if @props.path == 'update'
       $.ajax
-        url: 'http://localhost:3000/hotels/' + @props.id
+        url: "#{@props.url}hotels/#{@props.id}"
         contentType: 'application/json'
         dataType: 'json'
         success: ((data) ->
@@ -30,7 +30,7 @@
     e.preventDefault()
     if @props.path == 'create'
       $.post
-        url: 'http://localhost:3000/hotels/'
+        url: "#{@props.url}hotels"
         contentType: 'application/json'
         dataType: 'json'
         data: JSON.stringify(
@@ -47,7 +47,7 @@
     else
       $.ajax
         method: 'PUT'
-        url: 'http://localhost:3000/hotels/' + @props.id
+        url: "#{@props.url}hotels/#{@props.id}"
         contentType: 'application/json'
         dataType: 'json'
         data: JSON.stringify(
@@ -107,6 +107,7 @@
           React.createElement AccomodationTypeSelector,
             name: 'accomodation_type_id'
             value: @state.accomodation_type_id
+            url: @props.url
             onChange: @handleChange
 
         React.DOM.button
