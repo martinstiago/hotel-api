@@ -17,5 +17,4 @@
 //= require react_ujs
 //= require components
 //= require bootstrap
-//= require select2
 //= require_tree .

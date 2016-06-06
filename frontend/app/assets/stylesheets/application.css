@@ -12,7 +12,5 @@
  *
  *= require_tree .
  *= require bootstrap
- *= require select2
- *= require select2-bootstrap-theme
  *= require_self
  */
