@@ -18,13 +18,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <%= link_to 'Challenge - TMA', root_url, class: "navbar-brand" %>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
+            <li class="<%= 'active' if current_page?(controller: 'hotels', action: 'new') %>">
+              <%= link_to 'New Hotel', new_hotel_path %>
+            </li>
           </ul>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
