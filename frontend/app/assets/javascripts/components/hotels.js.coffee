@@ -24,6 +24,12 @@
   componentDidMount: ->
     @loadCommentsFromServer()
 
+  deleteHotel: (hotel) ->
+    hotels = @state.hotels.slice()
+    index = hotels.indexOf hotel
+    hotels.splice index, 1
+    @replaceState hotels: hotels
+
   render: ->
     React.DOM.div
       className: 'hotels'
@@ -39,9 +45,11 @@
             React.DOM.th null, 'Address'
             React.DOM.th null, 'StarRating'
             React.DOM.th null, 'AccomodationType'
+            React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           if @state.hotels?
             for hotel in @state.hotels
               React.createElement IndexHotel,
                 key: hotel.id
                 hotel: hotel
+                handleDeleteHotel: @deleteHotel

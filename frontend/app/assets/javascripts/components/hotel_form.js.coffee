@@ -11,7 +11,6 @@
         url: 'http://localhost:3000/hotels/' + @props.id
         contentType: 'application/json'
         dataType: 'json'
-        cache: false
         success: ((data) ->
           @setState name: data.name
           @setState address: data.address
