@@ -1,6 +1,6 @@
 # README
 
-Backend developed with Rails 5 API, Frontend developed with Rails 5
+Backend developed with Rails 5 API, Frontend developed with Rails 5 + React
 
 To execute the code, run the following commands on both folders:
 
