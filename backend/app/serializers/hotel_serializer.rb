@@ -1,7 +1,5 @@
 class HotelSerializer < ActiveModel::Serializer
-  attributes :id, :name, :address, :star_rating, :accomodation_type
+  attributes :id, :name, :address, :star_rating
 
-  def accomodation_type
-    AccomodationTypeSerializer.new(object.accomodation_type)
-  end
+  belongs_to :accomodation_type
 end
