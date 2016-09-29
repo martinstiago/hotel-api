@@ -17,7 +17,7 @@ class HotelsController < ApplicationController
   end
 
   def show
-    render json: HotelWithAccomodationSerializer.new(@hotel)
+    render json: @hotel
   end
 
   def update
